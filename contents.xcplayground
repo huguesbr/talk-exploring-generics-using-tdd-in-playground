@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='osx' display-mode='raw'>
     <pages>
-        <page name='Intro - Simple Stack'/>
+        <page name='Intro'/>
+        <page name='Testing in Playground'/>
+        <page name='Simple Generic Stack'/>
+        <page name='Testing our Stack'/>
         <page name='MaxStack'/>
-        <page name='CSS Compare?'/>
+        <page name='CSS Selector Precedence'/>
         <page name='Final Touch'/>
     </pages>
 </playground>

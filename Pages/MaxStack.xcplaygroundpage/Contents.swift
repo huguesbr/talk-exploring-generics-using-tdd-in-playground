@@ -1,31 +1,19 @@
 //: [Previous](@previous)
+/*:
 
+# Building a stack keeping track of max element using Protocol oriented programming
 
-//: # Building a stack keeping track of max element
+In order to keep track of a max item, we just need a way to compare them.
+Luckily we can express this using generics.
 
-class Stack<T> {
-    var items:[T]
-    
-    init(){
-        self.items = []
-    }
-    
-    func push(value:T) {
-        items.append(value)
-    }
-    
-    func pop() -> T? {
-        return items.popLast()
-    }
-    
-    func peek() -> T? {
-        if items.count == 0 { return nil }
-        return items[items.count - 1]
-    }
-}
+Generics allow to express protocol requirement. 
+You could do this in Objective-C using `id<SomeProtocol>`.
 
-//: Protocol oriented style, 
-//: We just need a type which is comparable
+But event more Swift have declare equivalency and comparaison using protocol (Also, thanks to operator overloading...)
+
+So we can express the **comparable requirement** in our generics implementation.
+
+*/
 
 class MaxStack<T:Comparable> {
     var items:Stack<T>
@@ -63,5 +51,7 @@ class MaxStack<T:Comparable> {
         return maxStack.peek()
     }
 }
+
+//: We should have some tests for this...
 
 //: [Next](@next)

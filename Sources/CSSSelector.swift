@@ -1,9 +1,10 @@
 import Foundation
 
+
 public struct CSSSelector {
     let selector: String
     
-    public struct Specificity {
+    struct Specificity {
         let id: Int
         let `class`: Int
         let element: Int
@@ -28,7 +29,7 @@ public struct CSSSelector {
     
     let specificity: Specificity
     
-    init(_ string: String) {
+    public init(_ string: String) {
         self.selector = string
         
         // Naïve tokenization, ignoring operators, pseudo-selectors, and `style=`.
@@ -37,8 +38,6 @@ public struct CSSSelector {
     }
 }
 
-// MARK: ## Let's make it Equatable
-
 extension CSSSelector: Equatable {}
 
 public func ==(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
@@ -46,28 +45,24 @@ public func ==(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
     return lhs.selector == rhs.selector
 }
 
-// MARK: ## Let's make it Comparable
-
-// MARK: ### Let's first make CSS specificity Equatable And comparable
-
 extension CSSSelector.Specificity: Comparable {}
 
-public func <(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
-    return lhs.id < rhs.id ||
-        lhs.`class` < rhs.`class` ||
-        lhs.element < rhs.element
+func <(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
+    let result = lhs.id < rhs.id ||
+        lhs.id == rhs.id && lhs.`class` < rhs.`class` ||
+        lhs.id == rhs.id && lhs.`class` == rhs.`class` && lhs.element < rhs.element
+    
+    return result
 }
 
 extension CSSSelector.Specificity: Equatable {}
 
 
-public func ==(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
+func ==(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
     return lhs.id == rhs.id &&
         lhs.`class` == rhs.`class` &&
         lhs.element == rhs.element
 }
-
-// MARK: ## Now we can make CSSSelector Comparable
 
 extension CSSSelector: Comparable {}
 

@@ -1,7 +1,26 @@
 //: [Previous](@previous)
+/*:
 
-//: # Thanks to Mattt Thompson article about Swift Comparison Protocols
-//: (http://nshipster.com/swift-comparison-protocols/)[http://nshipster.com/swift-comparison-protocols/]
+# CSS selectors precedence
+    
+//  browser does need to decide which one of these statements to honor
+
+CSS selectors need to be order by precedence in order to know how to resolve conflicting CSS properties.
+
+Ex.:
+* `div { color: blue; }`
+* `.favorite { color: blue; }`
+* `#header .favorite { color: red; }`
+
+CSS use the most precise selector to determine which property should be apply.
+
+The specificity of a selector could be (drastically reduce, for this exemple) by counting the number of specifity selector token (`#`, `.`, none).
+We could then determine the most precise selector by comparing this counter.
+
+Thanks to Mattt Thompson's article about **Swift Comparison Protocols**, we have a draft implementation of this.
+Check it out here: 
+    http://nshipster.com/swift-comparison-protocols/
+*/
 
 import Foundation
 
@@ -36,46 +55,50 @@ struct CSSSelector {
     init(_ string: String) {
         self.selector = string
         
-        // Naïve tokenization, ignoring operators, pseudo-selectors, and `style=`.
+        // **Naïve** tokenization, ignoring operators, pseudo-selectors, and `style=`.
         let components: [String] = self.selector.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         self.specificity = Specificity(components)
     }
 }
 
-// MARK: ## Let's make it Equatable
+//: ## Let's make it Equatable
 
+extension CSSSelector: Equatable {}
 func ==(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
     // Naïve equality that uses string comparison rather than resolving equivalent selectors
     return lhs.selector == rhs.selector
 }
-extension CSSSelector: Equatable {}
 
-// MARK: ## Let's make it Comparable
+//: ## Let's make it Comparable
 
-// MARK: ### We first need to make CSS specificity Equatable And comparable
+//: ### We first need to make CSS specificity Equatable And comparable
 
-func <(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
-    return lhs.id < rhs.id ||
-        lhs.`class` < rhs.`class` ||
-        lhs.element < rhs.element
-}
 extension CSSSelector.Specificity: Comparable {}
+func <(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
+    let result = lhs.id < rhs.id ||
+        lhs.id == rhs.id && lhs.`class` < rhs.`class` ||
+        lhs.id == rhs.id && lhs.`class` == rhs.`class` && lhs.element < rhs.element
+    
+    return result
+}
 
+extension CSSSelector.Specificity: Equatable {}
 func ==(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
     return lhs.id == rhs.id &&
         lhs.`class` == rhs.`class` &&
         lhs.element == rhs.element
 }
-extension CSSSelector.Specificity: Equatable {}
 
-// MARK: ## Now we can make CSSSelector Comparable
+//: ## Now we can make CSSSelector Comparable
 
+extension CSSSelector: Comparable {}
 func <(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
     return lhs.specificity < rhs.specificity
 }
-extension CSSSelector: Comparable {}
 
-//: Let's test it
+/*:
+    ## Let's, quickly, test it
+*/
 
 import XCTest
 
@@ -85,7 +108,6 @@ class CSSSelectorTests : XCTestCase {
         let a = CSSSelector("#logo")
         let b = CSSSelector(".logo")
         XCTAssertTrue(a > b)
-        XCTAssertTrue(a < b)
     }
     
     func testClassOverElement() {
@@ -93,23 +115,44 @@ class CSSSelectorTests : XCTestCase {
         let b = CSSSelector("div")
         XCTAssertTrue(a > b)
     }
-    
+
     func testMultipleSpecifities() {
-        let a = CSSSelector("html #logo")
-        let b = CSSSelector(".container #logo")
-        //!?
+        let a = CSSSelector("#logo .class")
+        let b = CSSSelector("#logo div")
         XCTAssertTrue(a > b)
-        XCTAssertTrue(a < b)
     }
     
 }
 
+//: [Next](@next)
 
-//: # Unit Test Boilerplate
 
-//: ## Observe & Report
-//:
-//: In order to report filing tests, we also need to add a test observer, conforming to XCTestObservation, which will be notified whenever a test fails and print the failure to the console. The observer is then added to the XCTestObservationCenter to allow the system to notify the observer of test failures:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//: Unit Test Boilerplate (tricky to move to source files)
 
 class PlaygroundTestObserver : NSObject, XCTestObservation {
     @objc func testCase(testCase: XCTestCase, didFailWithDescription description: String, inFile filePath: String?, atLine lineNumber: UInt) {
@@ -120,11 +163,6 @@ class PlaygroundTestObserver : NSObject, XCTestObservation {
 let observer = PlaygroundTestObserver()
 let center = XCTestObservationCenter.sharedTestObservationCenter()
 center.addTestObserver(observer)
-
-
-//: ## The Running Man
-//:
-//: After this is the TestRunner, which runs the tests from an XCTestCase and reports on the results. This is done using the same XCTestSuite mechanism which Xcode uses to run unit tests. At the end of the run, a message is printed to the console, telling you how many tests were run, how long it took, and how many of the tests failed.
 
 struct TestRunner {
     
@@ -140,10 +178,6 @@ struct TestRunner {
     
 }
 
-//: ## Run the test suit
-
-TestRunner().runTests(ComposedTests)
-TestRunner().runTests(SpecifitityComparableTests)
 TestRunner().runTests(CSSSelectorTests)
 
-//: [Next](@next)
+

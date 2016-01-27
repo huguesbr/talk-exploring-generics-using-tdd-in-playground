@@ -1,13 +1,13 @@
 public class MaxStack<T:Comparable> {
-    var items:Stack<T>
-    var maxStack:Stack<T>
+    public var items:Stack<T>
+    public var maxStack:Stack<T>
     
-    init(){
+    public init(){
         self.items = Stack<T>()
         self.maxStack = Stack<T>()
     }
     
-    func push(value:T) {
+    public func push(value:T) {
         if let maxValue = maxStack.peek() {
             if(value >= maxValue) {
                 maxStack.push(value)
@@ -18,7 +18,7 @@ public class MaxStack<T:Comparable> {
         items.push(value)
     }
     
-    func pop() -> T? {
+    public func pop() -> T? {
         guard let value = items.pop() else { return nil }
         if let maxValue = maxStack.peek() {
             if(value == maxValue) { maxStack.pop() }
@@ -26,12 +26,11 @@ public class MaxStack<T:Comparable> {
         return value
     }
     
-    func peek() -> T? {
+    public func peek() -> T? {
         return items.peek()
     }
     
-    func getMax() -> T? {
+    public func getMax() -> T? {
         return maxStack.peek()
     }
 }
-

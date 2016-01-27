@@ -1,21 +1,23 @@
+
 public class Stack<T> {
-    var items:[T]
+    public var items:[T]
     
-    init(){
+    public init(){
         self.items = []
     }
     
-    func push(value:T) {
+    public func push(value:T) {
         items.append(value)
     }
     
-    func pop() -> T? {
+    public func pop() -> T? {
         return items.popLast()
     }
     
-    func peek() -> T? {
+    public func peek() -> T? {
         if items.count == 0 { return nil }
         return items[items.count - 1]
     }
 }
+
 
