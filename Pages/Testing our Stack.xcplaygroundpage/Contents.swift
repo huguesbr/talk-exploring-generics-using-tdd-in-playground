@@ -118,6 +118,10 @@ class PlaygroundTestObserver : NSObject, XCTestObservation {
     @objc func testCase(testCase: XCTestCase, didFailWithDescription description: String, inFile filePath: String?, atLine lineNumber: UInt) {
         print("Test failed on line \(lineNumber): \(testCase.name), \(description)")
     }
+
+    @objc func testCaseWillStart(testCase: XCTestCase) {
+        print("Running: \(testCase.name)")
+    }
 }
 
 let observer = PlaygroundTestObserver()
