@@ -1,2 +1,8 @@
-# exploring-generics-using-tdd-in-playground
-Exploring Generics using TDD in Playground
+# Exploring Generics using TDD in Playground
+
+
+Hugues Bernet-Rollande
+
+Lead Developer @ Wired Beauty
+
+Light talk @ DotSwift Conference Paris 2015
