@@ -32,8 +32,7 @@ class CSSMaxSelectorTests : XCTestCase {
 
     ## Conclusion
 
-    Generics allow to **focus on underlying behaviors required by a class** (or protocol)
-    in order to accomplish a task.
+    Generics allow to **focus on underlying behaviors required by a class** in order to accomplish a task.
 
     It improve **re-usability** (discoverability might be an issue) and **testability** (generics are easier to test because not dependent of a class but a procotocol, reduce usage of Mocks).
 

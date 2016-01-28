@@ -9,7 +9,7 @@ The main idea is to use `XCTestObservation` protocol and `XCTestObservationCente
 
 Basically, when ever a test is run in xcode, `XCTestObservationCenter` can dispatch event to any registered class conform to `XCTestObservation`.
 
-We're piggy backing on XCode Unit Test to run our Unit Test in XCode.
+We're piggy backing on XCode Unit Test way to run our Unit Test in XCode.
 
 `XCTestObservationCenter` dispatch multiples event but the one we're really interested in is `testCase:didFailWithDescription:inFile:atLine:`
 
@@ -19,7 +19,7 @@ We're piggy backing on XCode Unit Test to run our Unit Test in XCode.
 
 ## Observe & Report
 
-In order to report filing tests, we also need to add a test observer, conforming to XCTestObservation, which will be notified whenever a test fails and print the failure to the console. The observer is then added to the XCTestObservationCenter to allow the system to notify the observer of test failures
+In order to report failing tests, we need to add a test observer, conforming to `XCTestObservation`, which will be notified whenever a test fails and print the failure to the console. The observer is then added to the `XCTestObservationCenter` to allow the system to notify the observer of test failures
 
 */
 
@@ -37,7 +37,7 @@ center.addTestObserver(observer)
 
 //: ## The Running Man
 //:
-//: After this is the TestRunner, which runs the tests from an XCTestCase and reports on the results. This is done using the same XCTestSuite mechanism which Xcode uses to run unit tests. At the end of the run, a message is printed to the console, telling you how many tests were run, how long it took, and how many of the tests failed.
+//: After this is the TestRunner, which runs the tests from an `XCTestCase` and reports on the results. This is done using the same `XCTestSuite` mechanism which Xcode uses to run unit tests. At the end of the run, a message is printed to the console, telling you how many tests were run, how long it took, and how many of the tests failed.
 
 struct TestRunner {
 

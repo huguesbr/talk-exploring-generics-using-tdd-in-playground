@@ -3,6 +3,8 @@
 
 ## Now, let's build a simple generic stack
 
+Note that our generic stack will be a stack of any **homogeneous** type.
+
 */
 
 class Stack<T> {
