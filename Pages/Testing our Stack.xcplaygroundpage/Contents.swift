@@ -3,6 +3,8 @@
 
 ## Let's test our generic stack with somes Ints
 
+Even with some **weak tests**, implementation dependent...
+
 */
 
 import XCTest

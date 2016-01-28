@@ -3,8 +3,6 @@
 
 # Unit Testing in Playground
 
-Thanks to **Stuart Sharpe**'s article **[TTD in Swift Playground](http://initwithstyle.net/2015/11/tdd-in-swift-playgrounds/)** for more info about Unit Testing in Playground
-
 The main idea is to use `XCTestObservation` protocol and `XCTestObservationCenter`.
 
 Basically, when ever a test is run in xcode, `XCTestObservationCenter` can dispatch event to any registered class conform to `XCTestObservation`.
@@ -13,6 +11,10 @@ We're piggy backing on XCode Unit Test way to run our Unit Test in XCode.
 
 `XCTestObservationCenter` dispatch multiples event but the one we're really interested in is `testCase:didFailWithDescription:inFile:atLine:`
 
+Thanks to **Stuart Sharpe**'s article **[TTD in Swift Playground](http://initwithstyle.net/2015/11/tdd-in-swift-playgrounds/)** for more info about Unit Testing in Playground
+
+Check it out here: http://initwithstyle.net/2015/11/tdd-in-swift-playgrounds/
+
 */
 
 /*:
@@ -20,6 +22,8 @@ We're piggy backing on XCode Unit Test way to run our Unit Test in XCode.
 ## Observe & Report
 
 In order to report failing tests, we need to add a test observer, conforming to `XCTestObservation`, which will be notified whenever a test fails and print the failure to the console. The observer is then added to the `XCTestObservationCenter` to allow the system to notify the observer of test failures
+
+Finally you can run your test using the `runTest()` method on your test.
 
 */
 

@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
 
-# Building a stack keeping track of max element using Protocol oriented programming
+# Building a stack keeping track of max element, O(n)
 
 In order to keep track of a max item, we just need a way to compare them.
 Luckily we can express this using generics.
@@ -12,7 +12,7 @@ Generics allow to express protocol requirement.
 Swift have declare equivalency and comparaison using protocol, not possible in Obj-C (Also, thanks to operator overloading...)
 So we can express the **comparable requirement** in our generics implementation.
 
-Also, the homogeneous requirement of Generics allows us to avoid comparing Apple and Robot...
+Also, the homogeneous requirement of Generics allows us to avoid comparing Apple and Bananas...
 
 */
 
@@ -76,6 +76,7 @@ class MaxStack<T:Comparable> {
         if let maxValue = maxStack.peek() {
             if(value == maxValue) { maxStack.pop() }
         }
+
         return value
     }
     

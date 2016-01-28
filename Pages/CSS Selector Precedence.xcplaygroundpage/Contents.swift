@@ -15,7 +15,8 @@ In order to determine precedence, CSS use the most precise selector.
 The specificity of a selector could be (drastically reduce, for this exemple) by counting the number of specifity selector token (`#`, `.`, none).
 We could then determine the most precise selector by comparing this counter.
 
-Thanks to **Mattt Thompson**'s article about **Swift Comparison Protocols**, we have a draft implementation of this.
+Thanks to **Mattt Thompson**'s article about [**Swift Comparison Protocols**](http://nshipster.com/swift-comparison-protocols/), we have a draft implementation of this.
+
 Check it out here: 
     http://nshipster.com/swift-comparison-protocols/
 */
@@ -69,7 +70,7 @@ func ==(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
 
 //: ## Let's make it Comparable
 
-//: ### We first need to make CSS specificity Equatable And comparable
+//: We first need to make CSS specificity Equatable And comparable
 
 extension CSSSelector.Specificity: Comparable {}
 func <(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
