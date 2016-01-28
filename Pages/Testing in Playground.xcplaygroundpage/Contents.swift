@@ -3,7 +3,7 @@
 
 # Unit Testing in Playground
 
-Check Stuart Sharpe's article [TTD in Swift Playground](http://initwithstyle.net/2015/11/tdd-in-swift-playgrounds/) for more info about Unit Testing in Playground
+Thanks to **Stuart Sharpe**'s article **[TTD in Swift Playground](http://initwithstyle.net/2015/11/tdd-in-swift-playgrounds/)** for more info about Unit Testing in Playground
 
 The main idea is to use `XCTestObservation` protocol and `XCTestObservationCenter`.
 
@@ -35,9 +35,11 @@ let observer = PlaygroundTestObserver()
 let center = XCTestObservationCenter.sharedTestObservationCenter()
 center.addTestObserver(observer)
 
-//: ## The Running Man
-//:
-//: After this is the TestRunner, which runs the tests from an `XCTestCase` and reports on the results. This is done using the same `XCTestSuite` mechanism which Xcode uses to run unit tests. At the end of the run, a message is printed to the console, telling you how many tests were run, how long it took, and how many of the tests failed.
+/*: 
+## The Running Man
+
+After this is the TestRunner, which runs the tests from an `XCTestCase` and reports on the results. This is done using the same `XCTestSuite` mechanism which Xcode uses to run unit tests. At the end of the run, a message is printed to the console, telling you how many tests were run, how long it took, and how many of the tests failed.
+*/
 
 struct TestRunner {
 

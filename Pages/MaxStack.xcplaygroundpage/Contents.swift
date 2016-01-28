@@ -6,12 +6,13 @@
 In order to keep track of a max item, we just need a way to compare them.
 Luckily we can express this using generics.
 
-Generics allow to express protocol requirement. 
-You could do this in Objective-C using `id<SomeProtocol>`.
+Generics allow to express protocol requirement.
+(You could do this in Objective-C using `id<SomeProtocol>`)
 
-But event more Swift have declare equivalency and comparaison using protocol (Also, thanks to operator overloading...)
-
+Swift have declare equivalency and comparaison using protocol, not possible in Obj-C (Also, thanks to operator overloading...)
 So we can express the **comparable requirement** in our generics implementation.
+
+Also, the homogeneous requirement of Generics allows us to avoid comparing Apple and Robot...
 
 */
 

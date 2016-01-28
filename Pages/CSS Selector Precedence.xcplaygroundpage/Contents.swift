@@ -2,22 +2,20 @@
 /*:
 
 # CSS selectors precedence
-    
-//  browser does need to decide which one of these statements to honor
 
-CSS selectors need to be order by precedence in order to know how to resolve conflicting CSS properties.
+CSS selectors might be "conflicting", browse needs to decide which one of these statements to honor. (precedence)
 
 Ex.:
 * `div { color: blue; }`
 * `.favorite { color: blue; }`
 * `#header .favorite { color: red; }`
 
-CSS use the most precise selector to determine which property should be apply.
+In order to determine precedence, CSS use the most precise selector.
 
 The specificity of a selector could be (drastically reduce, for this exemple) by counting the number of specifity selector token (`#`, `.`, none).
 We could then determine the most precise selector by comparing this counter.
 
-Thanks to Mattt Thompson's article about **Swift Comparison Protocols**, we have a draft implementation of this.
+Thanks to **Mattt Thompson**'s article about **Swift Comparison Protocols**, we have a draft implementation of this.
 Check it out here: 
     http://nshipster.com/swift-comparison-protocols/
 */
@@ -76,8 +74,8 @@ func ==(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
 extension CSSSelector.Specificity: Comparable {}
 func <(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
     let result = lhs.id < rhs.id ||
-        lhs.id == rhs.id && lhs.`class` < rhs.`class` ||
-        lhs.id == rhs.id && lhs.`class` == rhs.`class` && lhs.element < rhs.element
+        (lhs.id == rhs.id && lhs.`class` < rhs.`class`) ||
+        (lhs.id == rhs.id && lhs.`class` == rhs.`class` && lhs.element < rhs.element)
     
     return result
 }
@@ -89,16 +87,14 @@ func ==(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
         lhs.element == rhs.element
 }
 
-//: ## Now we can make CSSSelector Comparable
+//: Now we can make CSSSelector Comparable
 
 extension CSSSelector: Comparable {}
 func <(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
     return lhs.specificity < rhs.specificity
 }
 
-/*:
-    ## Let's, quickly, test it
-*/
+//: ## Let's, quickly, test it
 
 import XCTest
 
