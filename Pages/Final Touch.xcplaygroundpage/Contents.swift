@@ -30,14 +30,17 @@ class CSSMaxSelectorTests : XCTestCase {
 
 /*:
 
-    ## Conclusion
+## Conclusion
 
-    Generics allow to **focus on underlying behaviors required by a class** in order to accomplish a task.
+Generics allow to **focus on underlying behaviors required by a class** in order to accomplish a task.
 
-    It improve **re-usability** (discoverability might be an issue) and **testability** (generics are easier to test because not dependent of a class but a procotocol, reduce usage of Mocks).
+It improve **re-usability** (discoverability might be an issue) and **testability**.
 
-    Where to go from here?
-    We could have implemented our stack as a protocol and have its default implementation using protocol extension, likewise for maxStack and then add this behavior to a CSSDocument class.
+Where to go from here?
+* Could we have implemented our stack as a protocol?
+* Declaring maxStack conform to this protocol?
+* Write a unit-test for our protocol and then for having maxStack partially tested for free?
+* **Protocol Oriented Programming: WWDC 2015 (Dave Abrahams)**
 
 */
 
