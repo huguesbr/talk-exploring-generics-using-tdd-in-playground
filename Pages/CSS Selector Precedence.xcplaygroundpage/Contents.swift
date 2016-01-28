@@ -118,6 +118,24 @@ class CSSSelectorTests : XCTestCase {
         XCTAssertTrue(a > b)
     }
     
+//    func testIdsEquality() {
+//        let a = CSSSelector("#logo")
+//        let b = CSSSelector("#logo2")
+//        XCTAssertTrue(a == b)
+//    }
+//
+//    func testClassesEquality() {
+//        let a = CSSSelector(".class")
+//        let b = CSSSelector(".class2")
+//        XCTAssertTrue(a == b)
+//    }
+//
+//    func testElementsEquality() {
+//        let a = CSSSelector("div")
+//        let b = CSSSelector("p")
+//        XCTAssertTrue(a == b)
+//    }
+
 }
 
 //: [Next](@next)
